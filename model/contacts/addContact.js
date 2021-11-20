@@ -2,7 +2,7 @@ const fs = require('fs/promises');
 const uniqid = require('uniqid');
 const listContacts = require('./listContacts');
 const path = require('path');
-const contactsPath = path.join(__dirname, '/model/contacts.json');
+const contactsPath = path.join(__dirname, './contacts.json');
 
 const addContact = async body => {
   const contactList = await listContacts();
