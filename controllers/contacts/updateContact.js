@@ -6,7 +6,7 @@ const updateContact = async (req, res) => {
   const result = await contactsOperations.updateContact(id, req.body);
 
   if (!result) {
-    throw new NotFound(`Product with id=${id} not found`);
+    throw new NotFound(`Contact with id=${id} not found`);
   }
   res.json({
     status: 'success',

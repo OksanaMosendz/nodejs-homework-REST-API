@@ -3,9 +3,9 @@ const { NotFound } = require('http-errors');
 
 const getContactById = async (req, res) => {
   const { id } = req.params;
-  const result = contactsOperations.getContactById(id);
+  const result = await contactsOperations.getContactById(id);
   if (!result) {
-    throw new NotFound(`Product with id=${id} not found`);
+    throw new NotFound(`Contact with id=${id} not found`);
   }
   res.json({
     status: 'success',

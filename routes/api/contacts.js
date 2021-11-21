@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/', ctrlWrapper(contactsCtrl.listContacts));
 
-router.get('/:contactId', ctrlWrapper(contactsCtrl.getContactById));
+router.get('/:id', ctrlWrapper(contactsCtrl.getContactById));
 
 router.post(
   '/',
@@ -15,12 +15,8 @@ router.post(
   ctrlWrapper(contactsCtrl.addContact),
 );
 
-router.delete('/:contactId', ctrlWrapper(contactsCtrl.removeContact));
+router.delete('/:id', ctrlWrapper(contactsCtrl.removeContact));
 
-router.patch(
-  '/:contactId',
-  validation(contactsSchema),
-  contactsCtrl.updateContact,
-);
+router.patch('/:id', validation(contactsSchema), contactsCtrl.updateContact);
 
 module.exports = router;
