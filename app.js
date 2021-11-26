@@ -22,4 +22,16 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: err.message });
 });
 
+const mongoose = require('mongoose');
+
+const DB_HOST =
+  'mongodb+srv://oksanamosendz:qTwT6BuVS5X2Uuv@cluster0.mmbmq.mongodb.net/db-contacts?retryWrites=true&w=majority';
+mongoose
+  .connect(DB_HOST)
+  .then(() => console.log('Database connection successful'))
+  .catch(error => {
+    console.log(error.message);
+    process.exit(1);
+  });
+
 module.exports = app;
