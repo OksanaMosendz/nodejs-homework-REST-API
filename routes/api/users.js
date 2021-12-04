@@ -13,7 +13,7 @@ router.get('/', ctrlWrapper(contactsCtrl.listContacts));
 router.get('/:id', ctrlWrapper(contactsCtrl.getContactById));
 
 router.post(
-  '/',
+  '/signup',
   validation(joiContactsSchema),
   ctrlWrapper(contactsCtrl.addContact),
 );
