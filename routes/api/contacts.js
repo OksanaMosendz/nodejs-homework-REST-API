@@ -1,5 +1,5 @@
 const express = require('express');
-const { validation, ctrlWrapper } = require('../../middlewares/index');
+const { validation, ctrlWrapper, auth } = require('../../middlewares/index');
 const contactsCtrl = require('../../controllers/contacts');
 const {
   joiContactsSchema,
@@ -8,12 +8,13 @@ const {
 
 const router = express.Router();
 
-router.get('/', ctrlWrapper(contactsCtrl.listContacts));
+router.get('/', auth, ctrlWrapper(contactsCtrl.listContacts));
 
 router.get('/:id', ctrlWrapper(contactsCtrl.getContactById));
 
 router.post(
   '/',
+  auth,
   validation(joiContactsSchema),
   ctrlWrapper(contactsCtrl.addContact),
 );
