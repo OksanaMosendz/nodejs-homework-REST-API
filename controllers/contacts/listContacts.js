@@ -4,7 +4,7 @@ const listContacts = async (req, res) => {
   const { _id } = req.user;
   const result = await Contacts.find({ owner: _id }).populate(
     'owner',
-    '_id name email',
+    '_id name email phone favorite',
   );
   res.status(200).json({
     status: 'success',

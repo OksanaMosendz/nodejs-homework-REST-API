@@ -8,6 +8,7 @@ const {
 
 const router = express.Router();
 
+router.get('/', auth, ctrlWrapper(contactsCtrl.filterByStatus));
 router.get('/', auth, ctrlWrapper(contactsCtrl.listContacts));
 
 router.get('/:id', ctrlWrapper(contactsCtrl.getContactById));
