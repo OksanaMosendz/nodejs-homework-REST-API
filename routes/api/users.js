@@ -29,4 +29,6 @@ router.patch(
   ctrlWrapper(usersCtrl.updateAvatar),
 );
 
+router.get('/verify/:verificationToken', ctrlWrapper(usersCtrl.verifyEmail));
+
 module.exports = router;

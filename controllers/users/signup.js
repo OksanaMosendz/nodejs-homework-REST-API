@@ -1,7 +1,9 @@
 const { User } = require('../../models/index');
 const { Conflict } = require('http-errors');
+const { sendEmail } = require('../../helpers/index');
 const bcrypt = require('bcrypt');
 const gravatar = require('gravatar');
+const { nanoid } = require('nanoid');
 
 const signup = async (req, res) => {
   const { email, password } = req.body;
@@ -11,7 +13,22 @@ const signup = async (req, res) => {
   }
   const avatarURL = gravatar.url(email);
   const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
-  await User.create({ email, password: hashPassword, avatarURL });
+  const verificationToken = nanoid();
+
+  await User.create({
+    email,
+    password: hashPassword,
+    avatarURL,
+    verificationToken,
+  });
+
+  const mail = {
+    to: email,
+    subject: 'Подтверждение email',
+    html: `<a target="_blank" href="http://localhost:3000/api/users/verify/${verificationToken}">Подтвердитe email</a>`,
+  };
+
+  await sendEmail(mail);
 
   res.status(201).json({
     status: 'success',
@@ -20,6 +37,7 @@ const signup = async (req, res) => {
       email,
       password,
       avatarURL,
+      verificationToken,
     },
   });
 };

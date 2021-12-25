@@ -7,7 +7,7 @@ const login = async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
 
-  if (user && bcrypt.compareSync(password, user.password)) {
+  if (user && bcrypt.compareSync(password, user.password) && user.verify) {
     const { subscription } = user;
     const payload = {
       id: user._id,
@@ -27,7 +27,7 @@ const login = async (req, res) => {
     });
   } else {
     res.status(401).json({
-      message: 'Email or password is wrong',
+      message: 'Email is wrong or not verify, or password is wrong',
     });
   }
 };
