@@ -15,13 +15,6 @@ const nodemailerConfig = {
 
 const transporter = nodemailer.createTransport(nodemailerConfig);
 
-// const email = {
-//   to: 'oksanamosendz03@gmail.com',
-//   from: 'oksanamosendz@meta.ua',
-//   subject: 'Новая заявка с сайта',
-//   html: '<p>C сайта пришла новая заявка',
-// };
-
 const sendEmail = email => {
   transporter
     .sendMail(email)
